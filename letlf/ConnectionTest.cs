@@ -28,7 +28,6 @@ namespace letlf
                                 s += i < reader.FieldCount ? "; " : "";
                             }
                             sb.AppendLine(s);
-
                         }
                         Console.WriteLine(sb.ToString());
                     }

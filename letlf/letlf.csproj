@@ -15,7 +15,7 @@
     <Folder Include="SQL\function_scalar\" />
     <Folder Include="SQL\function_table\" />
     <Folder Include="SQL\proc_output\" />
-    <Folder Include="SQL\proc_result\" />
+    <Folder Include="SQL\proc_other\" />
     <Folder Include="SQL\table_result\" />
     <Folder Include="SQL\view\" />
     <Folder Include="SQL\table_output\" />
