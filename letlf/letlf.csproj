@@ -17,8 +17,13 @@
     <Folder Include="SQL\proc_output\" />
     <Folder Include="SQL\proc_other\" />
     <Folder Include="SQL\table_result\" />
-    <Folder Include="SQL\view\" />
     <Folder Include="SQL\table_output\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="SQL\view\[AW].[vGetAllCategories].sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

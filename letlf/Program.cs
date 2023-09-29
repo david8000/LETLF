@@ -11,6 +11,10 @@ namespace letlf
         //Connection string to ETL database:
         //(SQL Server is assumed)
         public const string conStr = @"Server=.\SQLEXPRESS;Database=ETL;Integrated Security=True;";
+
+
+
+        // *****************************************************************************
         static void Main(string[] args)
         {
             //Try a connection test:
@@ -22,12 +26,14 @@ namespace letlf
 
             Pipeline01.RunPipeline();
 
+            //ConnectionTest.ShowPaths_debug();
 
-
-
+            //Console.WriteLine(AppPath.ExePath);
+            //Console.WriteLine(AppPath.SQLbasePath);
+            //Console.WriteLine(AppPath.SQLviewPath);
+            
         }
-
-
+        // *****************************************************************************
 
 
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,6 +52,14 @@ namespace letlf
             }
             return result;
         }
-    
+
+        public static void ShowPaths_debug()
+        {
+            Console.WriteLine($"Launched from {Environment.CurrentDirectory}");
+            Console.WriteLine($"Physical location {AppDomain.CurrentDomain.BaseDirectory}");
+            Console.WriteLine($"AppContext.BaseDir {AppContext.BaseDirectory}");
+            Console.WriteLine($"Runtime Call {System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName)}");
+        }
+
     }
 }
