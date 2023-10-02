@@ -19,10 +19,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SQL\table_output\[destsys01].[letlf_out_test01].sql">
+    <None Update="SQL\table_output\destsys01.letlf_out_test01.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <None Update="SQL\view\[AW].[vGetAllCategories].sql">
+    <None Update="SQL\view\AW.vGetAllCategories.sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>

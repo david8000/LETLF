@@ -26,7 +26,7 @@ namespace letlf
 
         private static void RefreshViewOnServer()
         {
-            const string viewName = @"[AW].[vGetAllCategories]";
+            const string viewName = "AW.vGetAllCategories";
 
             using (SqlConnection connection = new SqlConnection(Program.conStr))
             {
@@ -49,7 +49,7 @@ namespace letlf
 
         private static void RefreshOutputTable()
         {
-            const string table = "[destsys01].[letlf_out_test01]";
+            const string table = "destsys01.letlf_out_test01";
 
             using (SqlConnection connection = new SqlConnection(Program.conStr))
             {
