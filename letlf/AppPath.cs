@@ -27,12 +27,22 @@ namespace letlf
             get { return Path.Combine(SQLbasePath, "view"); }
         }
 
+        public static string SQLtableOutputPath
+        {
+            get { return Path.Combine(SQLbasePath, "table_output"); }
+        }
+
+        //***
 
         public static string GetViewFullPath(string viewName)
         {
             return $@"{SQLviewPath}\{viewName}" + sql;
         }
 
+        public static string GetTableOutputFullPath(string table)
+        {
+            return $@"{SQLtableOutputPath}\{table}" + sql;
+        }
 
 
 

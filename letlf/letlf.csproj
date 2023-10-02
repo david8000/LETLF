@@ -16,11 +16,12 @@
     <Folder Include="SQL\function_table\" />
     <Folder Include="SQL\proc_output\" />
     <Folder Include="SQL\proc_other\" />
-    <Folder Include="SQL\table_result\" />
-    <Folder Include="SQL\table_output\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="SQL\table_output\[destsys01].[letlf_out_test01].sql">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="SQL\view\[AW].[vGetAllCategories].sql">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
