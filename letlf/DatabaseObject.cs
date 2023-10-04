@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using Microsoft.SqlServer.Management.Common; //nuget
+using Microsoft.SqlServer.Management.Smo; //nuget
 
 
 
@@ -58,21 +60,60 @@ namespace letlf
         }
 
 
+        //public static void RecreateProcedure(string procName)
+        //{
+        //    using (SqlConnection connection = new SqlConnection(Program.conStr))
+        //    {
+        //        string sqlFilePath = AppPath.GetProcedureOutputFullPath(procName);
+        //        string sqlCode = File.ReadAllText(sqlFilePath);
+
+        //        connection.Open();
+        //        int rslt;
+        //        rslt = new SqlCommand($"EXEC {sqlCode}", connection).ExecuteNonQuery();
+        //        Console.WriteLine($"Created/updated procedure {procName}, Result: {rslt}");
+
+        //        connection.Close();
+        //    }
+        //}
+
         public static void RecreateProcedure(string procName)
         {
-            using (SqlConnection connection = new SqlConnection(Program.conStr))
+
+            //USING SMO!
+            string serverName = @".\SQLEXPRESS";
+            string dbName = "ETL";
+
+            Server srv = new Server(serverName); //SMO
+
+
+            try
             {
                 string sqlFilePath = AppPath.GetProcedureOutputFullPath(procName);
-                string sqlCode = File.ReadAllText(sqlFilePath);
+                string sqlCode = System.IO.File.ReadAllText(sqlFilePath);
 
-                connection.Open();
-                int rslt;
-                rslt = new SqlCommand($"EXEC {sqlCode}", connection).ExecuteNonQuery();
-                Console.WriteLine($"Created/updated procedure {procName}, Result: {rslt}");
+                srv.Databases[dbName].ExecuteNonQuery(sqlCode);
 
-                connection.Close();
+                //server.ConnectionContext.ExecuteNonQuery(sqlCode);
+
+
+                Console.WriteLine($"Created/updated procedure {procName}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating/updating procedure {procName}: {ex.Message}");
+            }
+            finally
+            {
+                //server.ConnectionContext.Disconnect();
+                srv.ConnectionContext.Disconnect();
+
             }
         }
+
+
+
+
+
 
 
         public static void ExecuteProcedure(string procName)
