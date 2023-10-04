@@ -32,7 +32,15 @@ namespace letlf
             get { return Path.Combine(SQLbasePath, "table_output"); }
         }
 
+        public static string SQLprocedureOutputPath
+        {
+            get { return Path.Combine(SQLbasePath, "proc_output"); }
+        }
+
+
+
         //***
+        //Full paths to files:
 
         public static string GetViewFullPath(string viewName)
         {
@@ -44,6 +52,10 @@ namespace letlf
             return $@"{SQLtableOutputPath}\{table}" + sql;
         }
 
+        public static string GetProcedureOutputFullPath(string procedure)
+        {
+            return $@"{SQLprocedureOutputPath}\{procedure}" + sql;
+        }
 
 
     }

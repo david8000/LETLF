@@ -14,60 +14,30 @@ namespace letlf
         //a test pipeline
 
 
-
-
-
         public static void RunPipeline()
         {
-            RefreshViewOnServer();
-            RefreshOutputTable();
+            // (re-) create view
+            DatabaseObject.RecreateView("AW.vGetAllCategories");
+
+            // drop and create output table
+            string table = "DestSys01.letlf_out_test01";
+            DatabaseObject.RecreateTable(table);
+
+            //Update or create procedure
+            string proc = "AW.sp_letlf_out_test01";
+            DatabaseObject.RecreateProcedure(proc);
+
+            //Execute procedure:
+            DatabaseObject.ExecuteProcedure(proc);
+
+            Console.WriteLine($"Result of {proc} is now available in {table}");
+            Console.WriteLine($"SELECT * FROM {table}");
+
+
+
 
         }
 
-        private static void RefreshViewOnServer()
-        {
-            const string viewName = "AW.vGetAllCategories";
-
-            using (SqlConnection connection = new SqlConnection(Program.conStr))
-            {
-                connection.Open();
-                int r;
-                //drop view on server:
-                r = new SqlCommand($"DROP VIEW IF EXISTS {viewName}", connection).ExecuteNonQuery();
-                Console.WriteLine($"Dropped view {viewName} - {r} rows affected");
-
-                //crate view on server:                
-                string viewCodeFullPath = AppPath.GetViewFullPath(viewName);
-                string viewSQLCode = File.ReadAllText(viewCodeFullPath);
-                r = new SqlCommand(viewSQLCode, connection).ExecuteNonQuery();
-                Console.WriteLine($"Created view {viewName} - {r} rows affected");
-
-                connection.Close();
-            }
-        }
-
-
-        private static void RefreshOutputTable()
-        {
-            const string table = "destsys01.letlf_out_test01";
-
-            using (SqlConnection connection = new SqlConnection(Program.conStr))
-            {
-                connection.Open();
-                int r;
-                //drop table on server:
-                r = new SqlCommand($"DROP TABLE IF EXISTS {table}", connection).ExecuteNonQuery();
-                Console.WriteLine($"Dropped table {table} - {r} rows affected");
-
-                //crate table on server:                
-                string tableCodeFullPath = AppPath.GetTableOutputFullPath(table);
-                string tableSQLCode = File.ReadAllText(tableCodeFullPath);
-                r = new SqlCommand(tableSQLCode, connection).ExecuteNonQuery();
-                Console.WriteLine($"Created table {table} - {r} rows affected");
-
-                connection.Close();
-            }
-        }
 
     }
 
