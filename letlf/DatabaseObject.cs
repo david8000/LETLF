@@ -13,31 +13,40 @@ namespace letlf
 {
     internal class DatabaseObject
     {
-        public static void RecreateView(string viewName)
+        public static void CreateOrAlterView(string viewName)
         {
 
 
-            using (SqlConnection connection = new SqlConnection(Program.conStr))
+            //USING SMO!
+            //(see dependecies / nuget for further info..)
+
+
+            Server srv = new Server(Program.SMO_server); //SMO
+
+            try
             {
-                connection.Open();
+                string sqlFilePath = AppPath.GetViewFullPath(viewName);
+                string sqlCode = System.IO.File.ReadAllText(sqlFilePath);
 
-                //drop view on server:
-                new SqlCommand($"DROP VIEW IF EXISTS {viewName}", connection).ExecuteNonQuery();
-                Console.WriteLine($"Dropped view {viewName}");
+                srv.Databases[Program.SMO_dbName].ExecuteNonQuery(sqlCode);
 
-                //crate view on server:                
-                string viewCodeFullPath = AppPath.GetViewFullPath(viewName);
-                string viewSQLCode = File.ReadAllText(viewCodeFullPath);
-                new SqlCommand(viewSQLCode, connection).ExecuteNonQuery();
-                Console.WriteLine($"Created view {viewName}");
+                Console.WriteLine($"Created/updated view {viewName}");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error creating/updating view {viewName}: {ex.Message}");
+            }
+            finally
+            {
+                srv.ConnectionContext.Disconnect();
 
-                connection.Close();
             }
 
         }
 
 
-        public static void RecreateTable(string table)
+
+        public static void DropAndCreateTable(string table)
         {
 
             using (SqlConnection connection = new SqlConnection(Program.conStr))
@@ -60,41 +69,22 @@ namespace letlf
         }
 
 
-        //public static void RecreateProcedure(string procName)
-        //{
-        //    using (SqlConnection connection = new SqlConnection(Program.conStr))
-        //    {
-        //        string sqlFilePath = AppPath.GetProcedureOutputFullPath(procName);
-        //        string sqlCode = File.ReadAllText(sqlFilePath);
 
-        //        connection.Open();
-        //        int rslt;
-        //        rslt = new SqlCommand($"EXEC {sqlCode}", connection).ExecuteNonQuery();
-        //        Console.WriteLine($"Created/updated procedure {procName}, Result: {rslt}");
-
-        //        connection.Close();
-        //    }
-        //}
-
-        public static void RecreateProcedure(string procName)
+        public static void CreateOrAlterProcedure(string procName)
         {
 
             //USING SMO!
-            string serverName = @".\SQLEXPRESS";
-            string dbName = "ETL";
+            //(see dependecies / nuget for further info..)
 
-            Server srv = new Server(serverName); //SMO
 
+            Server srv = new Server(Program.SMO_server); //SMO
 
             try
-            {
+            {                
                 string sqlFilePath = AppPath.GetProcedureOutputFullPath(procName);
                 string sqlCode = System.IO.File.ReadAllText(sqlFilePath);
 
-                srv.Databases[dbName].ExecuteNonQuery(sqlCode);
-
-                //server.ConnectionContext.ExecuteNonQuery(sqlCode);
-
+                srv.Databases[Program.SMO_dbName].ExecuteNonQuery(sqlCode);
 
                 Console.WriteLine($"Created/updated procedure {procName}");
             }
@@ -104,7 +94,6 @@ namespace letlf
             }
             finally
             {
-                //server.ConnectionContext.Disconnect();
                 srv.ConnectionContext.Disconnect();
 
             }

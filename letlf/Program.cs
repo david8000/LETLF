@@ -8,29 +8,31 @@ namespace letlf
 {
     internal class Program
     {
+
+        // *****************************************************************************
+        // APP SETTINGS - WE CURRENTLY STORE THEM HERE :)
+
         //Connection string to ETL database:
         //(SQL Server is assumed)
         public const string conStr = @"Server=.\SQLEXPRESS;Database=ETL;Integrated Security=True;";
-
-
-
+        // Parameters for "SMO" - see dependencies / nuget:
+        public const string SMO_server= @".\SQLEXPRESS";
+        public const string SMO_dbName = "ETL";
         // *****************************************************************************
+
         static void Main(string[] args)
         {
             //Try a connection test:
             /*
             Console.WriteLine($"Working: {ConnectionTest.IsWorking()}");
             ConnectionTest.TestConnection("SELECT TOP 7 * FROM [SourceDataAdventureWorks].[Customer]");
+
+            //SMO connection test not yet implemented (231004). 
             */
 
 
             Pipeline01.RunPipeline();
 
-            //ConnectionTest.ShowPaths_debug();
-
-            //Console.WriteLine(AppPath.ExePath);
-            //Console.WriteLine(AppPath.SQLbasePath);
-            //Console.WriteLine(AppPath.SQLviewPath);
             
         }
         // *****************************************************************************

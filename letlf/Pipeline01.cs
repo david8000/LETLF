@@ -17,15 +17,15 @@ namespace letlf
         public static void RunPipeline()
         {
             // (re-) create view
-            DatabaseObject.RecreateView("AW.vGetAllCategories");
+            DatabaseObject.CreateOrAlterView("AW.vGetAllCategories");
 
             // drop and create output table
             string table = "DestSys01.letlf_out_test01";
-            DatabaseObject.RecreateTable(table);
+            DatabaseObject.DropAndCreateTable(table);
 
             //Update or create procedure
             string proc = "AW.sp_letlf_out_test01";
-            DatabaseObject.RecreateProcedure(proc);
+            DatabaseObject.CreateOrAlterProcedure(proc);
 
             //Execute procedure:
             DatabaseObject.ExecuteProcedure(proc);

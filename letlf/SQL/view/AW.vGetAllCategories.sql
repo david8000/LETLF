@@ -1,10 +1,10 @@
 
--- A view!
+-- A pointless view, just to complicate :)
 
 CREATE OR ALTER VIEW [AW].[vGetAllCategories]
 WITH SCHEMABINDING 
 AS 
--- A pointless view, just to complicate :)
+
 
 WITH CategoryCTE([ParentProductCategoryID], [ProductCategoryID], [Name], [_db_id], [_trans_time]) AS 
 (
