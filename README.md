@@ -4,6 +4,7 @@ This is a starting point when designing an ETL aka data migration application.
 The normal use case is to download the code and have it source controlled in your organization.
 
 Design goals:
+
 -It shall be a Visual Studio application - easy to program and source control.
 -It shall be possible to do the bulk of the work (ie transformation logic) in pure SQL language.
 -It shall also be possible to leverage the magnificent power of C#/.NET.
@@ -16,6 +17,7 @@ Design goals:
 
 
 Instructions:
+
 Have SQL Server installed. Ie SQLEXPRESS.
 Restore the included database "ETL". It contains sample source system data.
 
