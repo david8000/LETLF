@@ -17,7 +17,7 @@ Design goals:
 -There is a fixed folder structure within the VS project where SQL files are placed.
 
 -The means to get the "source data" into the ETL database is omitted.
- Ie SQL Server Integraton Services (SSIS) can be used for this in (VS plugin)
+ Ie SQL Server Integraton Services (SSIS) can be used for this purpose (VS plugin)
 
 
 
