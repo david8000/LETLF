@@ -30,7 +30,9 @@ namespace letlf
             //Execute procedure:
             DatabaseObject.ExecuteProcedure(proc);
 
+            Console.WriteLine("");
             Console.WriteLine($"Result of {proc} is now available in {table}");
+            Console.WriteLine("Try..");
             Console.WriteLine($"SELECT * FROM {table}");
 
 

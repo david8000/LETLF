@@ -102,9 +102,6 @@ namespace letlf
 
 
 
-
-
-
         public static void ExecuteProcedure(string procName)
         {
             using (SqlConnection connection = new SqlConnection(Program.conStr))
